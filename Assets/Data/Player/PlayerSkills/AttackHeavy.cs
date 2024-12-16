@@ -23,7 +23,7 @@ public class AttackHeavy : AttackAbstract
 
         effect.gameObject.SetActive(true);
 
-        this.SpawnSound(effectFly.transform.position);
+        //this.SpawnSound(effectFly.transform.position);
     }
 
     protected virtual EffectCtrl GetEffect()
