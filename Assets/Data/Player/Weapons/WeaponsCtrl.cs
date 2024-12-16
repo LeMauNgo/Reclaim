@@ -7,6 +7,7 @@ public class WeaponsCtrl : MyBehaviour
 {
     [SerializeField] protected Transform model;
     [SerializeField] protected Transform attackPoint;
+    public Transform AttackPoint => attackPoint;
     protected override void LoadComponent()
     {
         base.LoadComponent();

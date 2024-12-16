@@ -18,8 +18,8 @@ public class PlayerCtrl : MyBehaviour
     [SerializeField] protected Rig aimingRig;
     public Rig AimingRig => aimingRig;
 
-    //[SerializeField] protected WeaponsManager weapons;
-    //public WeaponsManager Weapons => weapons;
+    [SerializeField] protected WeaponsManager weapons;
+    public WeaponsManager Weapons => weapons;
 
     protected override void LoadComponent()
     {
@@ -28,15 +28,15 @@ public class PlayerCtrl : MyBehaviour
         this.LoadThirdPersonCamera();
         this.LoadCrosshairPointer();
         this.LoadAimingRig();
-        //this.LoadWeapons();
+        this.LoadWeapons();
     }
 
-    //protected virtual void LoadWeapons()
-    //{
-    //    if (this.weapons != null) return;
-    //    this.weapons = GetComponentInChildren<WeaponsManager>();
-    //    Debug.Log(transform.name + ": LoadWeapons", gameObject);
-    //}
+    protected virtual void LoadWeapons()
+    {
+        if (this.weapons != null) return;
+        this.weapons = GetComponentInChildren<WeaponsManager>();
+        Debug.Log(transform.name + ": LoadWeapons", gameObject);
+    }
 
     protected virtual void LoadAimingRig()
     {

@@ -7,6 +7,7 @@ public class WeaponsManager : MyBehaviour
     [SerializeField] protected int currentWeaponIndex = 0;
     [SerializeField] protected List<WeaponsCtrl> weapons;
 
+
     protected override void LoadComponent()
     {
         base.LoadComponent();
