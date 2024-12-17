@@ -35,4 +35,8 @@ public class InputHotkeys : MySingleton<InputHotkeys>
     {
         this.isToogleSetting = Input.GetKeyUp(KeyCode.N);
     }
+    public virtual bool SpawnSwat()
+    {
+        return Input.GetKeyUp(KeyCode.C);
+    }
 }
