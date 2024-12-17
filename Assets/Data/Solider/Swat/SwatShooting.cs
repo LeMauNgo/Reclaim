@@ -36,25 +36,41 @@ public class SwatShooting : SoliderAbstract
     protected virtual void LookAtTarget()
     {
         if (this.target == null) return;
-        Vector3 direction = target.transform.position - transform.position;
+        Vector3 direction = target.transform.position - transform.parent.position;
         direction.y = 0; 
 
         if (direction != Vector3.zero)
         {
             Quaternion rotation = Quaternion.LookRotation(direction);
-            transform.rotation = rotation;
+            transform.parent.rotation = rotation;
+        }
+    }
+    protected virtual bool CanShooting()
+    {
+        if (this.target == null || this.soliderCtrl.SoliderDamageReceiver.IsDead())
+        {
+            this.soliderCtrl.Agent.isStopped = false;
+            this.soliderCtrl.Animator.SetBool("IsFire", false);
+            return false;
+        }
+        else
+        {
+            this.soliderCtrl.Agent.isStopped = true;
+            this.soliderCtrl.Animator.SetBool("IsFire", true);
+            this.timer += Time.deltaTime;
+            return true;
         }
     }
     protected virtual void Shooting()
     {
-        if (this.target == null) return;
-        this.timer += Time.deltaTime;
+        if (!this.CanShooting()) return;
+
         if (this.timer < this.delay) return;
         this.timer = 0;
 
         this.SpawnProjectile(this.firePoint);
         this.SpawnMuzzle(this.firePoint);
-        this.SpawnSFX(this.firePoint.transform.position);
+        //this.SpawnSFX(this.firePoint.transform.position);
     }
     protected virtual void SpawnProjectile(AttackPoint firePoint)
     {

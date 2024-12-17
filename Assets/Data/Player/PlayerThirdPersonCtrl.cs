@@ -35,12 +35,12 @@ public class PlayerThirdPersonCtrl : vThirdPersonController
         _rigidbody = GetComponent<Rigidbody>();
 
         // capsule collider info
-        _capsuleCollider = GetComponent<CapsuleCollider>();
+        _capsuleCollider = transform.Find("PlayerDamageReceiver").GetComponent<CapsuleCollider>();
 
         // save your collider preferences 
-        colliderCenter = GetComponent<CapsuleCollider>().center;
-        colliderRadius = GetComponent<CapsuleCollider>().radius;
-        colliderHeight = GetComponent<CapsuleCollider>().height;
+        colliderCenter = transform.Find("PlayerDamageReceiver").GetComponent<CapsuleCollider>().center;
+        colliderRadius = transform.Find("PlayerDamageReceiver").GetComponent<CapsuleCollider>().radius;
+        colliderHeight = transform.Find("PlayerDamageReceiver").GetComponent<CapsuleCollider>().height;
 
         isGrounded = true;
     }

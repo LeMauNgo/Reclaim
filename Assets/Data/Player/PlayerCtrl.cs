@@ -20,7 +20,8 @@ public class PlayerCtrl : MyBehaviour
 
     [SerializeField] protected WeaponsManager weapons;
     public WeaponsManager Weapons => weapons;
-
+    [SerializeField] protected Animator animator;
+    public Animator Animator => animator;
     protected override void LoadComponent()
     {
         base.LoadComponent();
@@ -29,6 +30,7 @@ public class PlayerCtrl : MyBehaviour
         this.LoadCrosshairPointer();
         this.LoadAimingRig();
         this.LoadWeapons();
+        this.LoadAnimator();
     }
 
     protected virtual void LoadWeapons()
@@ -58,7 +60,12 @@ public class PlayerCtrl : MyBehaviour
         this.thirdPersonCtrl = GetComponent<vThirdPersonController>();
         Debug.Log(transform.name + ": LoadThirPersonCtrl", gameObject);
     }
-
+    protected virtual void LoadAnimator()
+    {
+        if (this.animator != null) return;
+        this.animator = transform.Find("Model").GetComponent<Animator>();
+        Debug.Log(transform.name + ": LoadAnimator", gameObject);
+    }
 
     protected virtual void LoadThirdPersonCamera()
     {

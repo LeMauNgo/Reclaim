@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(SphereCollider))]
-public class BulletDamageSender : DamageSender
+public abstract class BulletDamageSender : DamageSender
 {
     [SerializeField] protected SphereCollider sphereCollider;
     [SerializeField] protected EffectCtrl effectCtrl;
@@ -28,10 +28,12 @@ public class BulletDamageSender : DamageSender
     }
     protected override DamageReceiver SendDamage(Collider collider)
     {
+        if(!this.CanSendDamage(collider)) return null;
         DamageReceiver damageReceiver = base.SendDamage(collider);
         if (damageReceiver == null) return null;
-
+        
         this.effectCtrl.Despawn.DoDespawn();
         return damageReceiver;
     }
+    protected abstract bool CanSendDamage(Collider collider);
 }
