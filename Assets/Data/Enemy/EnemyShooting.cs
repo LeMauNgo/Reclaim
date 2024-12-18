@@ -47,7 +47,7 @@ public class EnemyShooting : EnemyAbstract
     }
     protected virtual bool CanShooting()
     {
-        if (this.target == null || this.enemyCtrl.EnemyDamageReceiver.IsDead())
+        if (this.target == null && !this.enemyCtrl.EnemyDamageReceiver.IsDead())
         {
             this.enemyCtrl.Agent.isStopped = false;
             this.enemyCtrl.Animator.SetBool("IsFire", false);
@@ -74,13 +74,13 @@ public class EnemyShooting : EnemyAbstract
     }
     protected virtual void SpawnProjectile(AttackPoint firePoint)
     {
-        EffectCtrl projectilePrefabs = EffectSpawnerCtrl.Instance.Prefabs.GetByName(EffectCode.Projectile_ElectricBall01_Green.ToString());
+        EffectCtrl projectilePrefabs = EffectSpawnerCtrl.Instance.Prefabs.GetByName(EffectCode.Projectile_ElectricBall01_Yellow.ToString());
         EffectCtrl bulletPbs = EffectSpawnerCtrl.Instance.Spawner.Spawn(projectilePrefabs, firePoint.transform.position, firePoint.transform.rotation);
         bulletPbs.gameObject.SetActive(true);
     }
     protected virtual void SpawnMuzzle(AttackPoint firePoint)
     {
-        EffectCtrl MuzzlePrefabs = EffectSpawnerCtrl.Instance.Prefabs.GetByName(EffectCode.Muzzle_ElectricBall01_Green.ToString());
+        EffectCtrl MuzzlePrefabs = EffectSpawnerCtrl.Instance.Prefabs.GetByName(EffectCode.Muzzle_ElectricBall01_Yellow.ToString());
         EffectCtrl Muzzle = EffectSpawnerCtrl.Instance.Spawner.Spawn(MuzzlePrefabs, firePoint.transform.position, firePoint.transform.rotation);
         Muzzle.gameObject.SetActive(true);
     }
