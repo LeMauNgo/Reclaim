@@ -33,6 +33,7 @@ public class EnemyDamageReceiver : DamageReceiver
     {
         this.ctrl.Animator.SetBool("IsDeath", this.isDead);
         this.capsuleCollider.enabled = false;
+        this.ctrl.EnemyRada.RemoveTarget();
         Invoke(nameof(DoDespawn), 5);
 
         //ItemDropSpawnerCtrl.Instance.DropMany(ItemCode.Gold, transform.position, 10);

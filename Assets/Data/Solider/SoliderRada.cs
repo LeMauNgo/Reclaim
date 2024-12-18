@@ -74,6 +74,15 @@ public class SoliderRada : MyBehaviour
             this.nearest = enemy;
         }
     }
+    private void OnEnable()
+    {
+        this.RemoveTarget();
+    }
+    public virtual void RemoveTarget()
+    {
+        this.enemies.Clear();
+        this.nearest = null;
+    }
     public virtual EnemyCtrl GetEnemy()
     {
         return this.nearest;

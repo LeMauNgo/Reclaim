@@ -47,7 +47,8 @@ public class EnemyShooting : EnemyAbstract
     }
     protected virtual bool CanShooting()
     {
-        if (this.target == null && !this.enemyCtrl.EnemyDamageReceiver.IsDead())
+        if (this.enemyCtrl.EnemyDamageReceiver.IsDead()) return false;
+        if (this.target == null)
         {
             this.enemyCtrl.Agent.isStopped = false;
             this.enemyCtrl.Animator.SetBool("IsFire", false);

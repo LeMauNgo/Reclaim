@@ -15,5 +15,6 @@ public class EnemyAbstract : MyBehaviour
         if (enemyCtrl != null) return;
         this.enemyCtrl = GetComponentInParent<EnemyCtrl>();
         Debug.Log("LoadEnemyCtrl", gameObject);
+
     }
 }

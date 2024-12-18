@@ -47,7 +47,9 @@ public class SwatShooting : SoliderAbstract
     }
     protected virtual bool CanShooting()
     {
-        if (this.target == null && !this.soliderCtrl.SoliderDamageReceiver.IsDead())
+        if(this.soliderCtrl.SoliderDamageReceiver.IsDead()) return false;
+
+        if (this.target == null)
         {
             this.soliderCtrl.Agent.isStopped = false;
             this.soliderCtrl.Animator.SetBool("IsFire", false);

@@ -15,7 +15,7 @@ public class SpawnSolider : PlayerAbstract
             SoliderCtrl prefab = SoliderSpawnerCtrl.Instance.Prefabs.GetByName("Swat");
             SoliderCtrl newEnemy = SoliderSpawnerCtrl.Instance.Spawner.Spawn(prefab, prefab.transform.position);
             newEnemy.gameObject.SetActive(true);
-            //this.spawnedEnemies.Add(newEnemy);
+            //this.spawnedSolider.Add(newEnemy);
         }
     }
 }

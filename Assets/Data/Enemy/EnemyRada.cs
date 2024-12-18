@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
@@ -36,6 +37,15 @@ public class EnemyRada : MyBehaviour
     {
         this.RemoveDeadTarget();
         this.FindNearest();
+    }
+    private void OnEnable()
+    {
+        this.RemoveTarget();
+    }
+    public virtual void RemoveTarget()
+    {
+        this.targets.Clear();
+        this.nearest = null;
     }
     private void OnTriggerEnter(Collider other)
     {
