@@ -27,6 +27,7 @@ public class SoliderDamageReceiver : DamageReceiver
         this.capsuleCollider.center = new Vector3(0, 1, 0);
         this.capsuleCollider.isTrigger = true;
         Debug.LogWarning(gameObject.name + "LoadCapsuleCollider", gameObject);
+
     }
     protected override void OnDead()
     {

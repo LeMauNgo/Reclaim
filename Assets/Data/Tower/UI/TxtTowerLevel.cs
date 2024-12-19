@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TxtTowerLevel : TxtLevel
+public abstract class TxtTowerLevel : TxtLevel
 {
     [SerializeField] protected TowerCtrl towerCtrl;
 
@@ -19,8 +19,8 @@ public class TxtTowerLevel : TxtLevel
         Debug.Log(transform.name + ": LoadTowerCtrl", gameObject);
     }
 
-    protected override string GetLevel()
-    {
-        return this.towerCtrl.Level.CurrentLevel.ToString();
-    }
+    //protected override string GetLevel()
+    //{
+    //    //return this.towerCtrl.Level.CurrentLevel.ToString();
+    //}
 }

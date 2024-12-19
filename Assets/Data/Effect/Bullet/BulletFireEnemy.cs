@@ -6,7 +6,7 @@ public class BulletFireEnemy : BulletDamageSender
 {
     protected override bool CanSendDamage(Collider collider)
     {
-        if(collider.GetComponentInParent<EnemyCtrl>()) return true; return false;
+        if(collider.GetComponentInParent<EnemyCtrl>() || collider.GetComponentInParent<TowerCtrl>()) return true; return false;
     }
     protected override void SpawnHit(Vector3 posittion)
     {
