@@ -23,5 +23,7 @@ public class GateDamageReceiver : EnemyDamageReceiver
     protected override void OnDead()
     {
         transform.parent.gameObject.SetActive(false);
+        UIManager.Instance.UICenter.ShowUiCenter("Win");
+        GameManager.Instance.SetGamePlay(false);
     }
 }

@@ -34,6 +34,8 @@ public class EnemyWave : MyBehaviour
 
     protected virtual void Spawning()
     {
+        if(!GameManager.Instance.IsPlaying()) return;
+        if(!GameManager.Instance.IsPlaying()) return;
         Invoke(nameof(this.Spawning), this.spawnSpeed);
 
         if (this.spawnedEnemies.Count >= this.maxSpawn) return;
