@@ -6,7 +6,7 @@ public class EnemyWave : MyBehaviour
 {
     [SerializeField] protected EnemySpawnerCtrl ctrl;
     [SerializeField] protected float spawnSpeed = 1f;
-    [SerializeField] protected int maxSpawn = 50;
+    [SerializeField] protected int maxSpawn = 15;
     [SerializeField] protected List<EnemyCtrl> spawnedEnemies = new();
 
     private void Start()
