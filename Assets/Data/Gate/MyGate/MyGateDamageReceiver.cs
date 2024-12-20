@@ -37,6 +37,7 @@ public class MyGateDamageReceiver : DamageReceiver
     }
     protected override void OnDead()
     {
+        if (!GameManager.Instance.IsPlaying()) return;
         transform.parent.gameObject.SetActive(false);
         UIManager.Instance.UICenter.ShowUiCenter("Lose");
         GameManager.Instance.SetGamePlay(false);

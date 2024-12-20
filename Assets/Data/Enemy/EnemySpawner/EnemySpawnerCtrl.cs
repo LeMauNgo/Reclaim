@@ -8,11 +8,20 @@ public class EnemySpawnerCtrl : MySingleton<EnemySpawnerCtrl>
     public EnemySpawner Spawner => spawner;
     [SerializeField] protected EnemyPrefabs prefabs;
     public EnemyPrefabs Prefabs => prefabs;
+    [SerializeField] protected EnemyWave enemyWave;
+    public EnemyWave EnemyWave => enemyWave;
     protected override void LoadComponent()
     {
         base.LoadComponent();
         this.LoadSpawner();
         this.LoadEnemyPrefabs();
+        this.LoadEnemyWave();
+    }
+    protected virtual void LoadEnemyWave()
+    {
+        if (this.enemyWave != null) return;
+        this.enemyWave = GetComponent<EnemyWave>();
+        Debug.LogWarning(gameObject.name + " LoadEnemyWave", gameObject);
     }
     protected virtual void LoadSpawner()
     {

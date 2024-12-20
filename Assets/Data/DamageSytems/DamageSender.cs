@@ -20,7 +20,7 @@ public abstract class DamageSender : MyBehaviour
         if (damageReceiver == null) return null;
 
         this.SpawnHit(damageReceiver.transform.position);
-        damageReceiver.Receive(this.damage, this);
+        damageReceiver.Receive(this.damage);
         return damageReceiver;
     }
     protected virtual void SpawnHit(Vector3 posittion)

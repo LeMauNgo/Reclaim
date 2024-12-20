@@ -22,6 +22,8 @@ public class PlayerCtrl : MyBehaviour
     public WeaponsManager Weapons => weapons;
     [SerializeField] protected Animator animator;
     public Animator Animator => animator;
+    [SerializeField] protected PlayerMana playerMana;
+    public PlayerMana PlayerMana => playerMana;
     protected override void LoadComponent()
     {
         base.LoadComponent();
@@ -31,8 +33,15 @@ public class PlayerCtrl : MyBehaviour
         this.LoadAimingRig();
         this.LoadWeapons();
         this.LoadAnimator();
+        this.LoadPlayerMana();
     }
+    protected virtual void LoadPlayerMana()
+    {
+        if (this.playerMana != null) return;
+        this.playerMana = GetComponentInChildren<PlayerMana>();
+        Debug.Log(transform.name + ": LoadPlayerMana", gameObject);
 
+    }
     protected virtual void LoadWeapons()
     {
         if (this.weapons != null) return;

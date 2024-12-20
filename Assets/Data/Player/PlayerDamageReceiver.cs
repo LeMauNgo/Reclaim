@@ -12,6 +12,11 @@ public class PlayerDamageReceiver : DamageReceiver
         this.LoadCapsuleCollider();
         this.LoadSoliderCtrl();
     }
+    private void OnEnable()
+    {
+        this.currentHP = 100;
+        this.maxHP = 100;
+    }
     protected virtual void LoadSoliderCtrl()
     {
         if (this.ctrl != null) return;
@@ -30,8 +35,12 @@ public class PlayerDamageReceiver : DamageReceiver
     }
     protected override void OnDead()
     {
-        this.ctrl.Animator.SetBool("IsDeath", this.isDead);
-        this.capsuleCollider.enabled = false;
+        //this.ctrl.Animator.SetBool("IsDeath", this.isDead);
+        //this.capsuleCollider.enabled = false;
+        if (!GameManager.Instance.IsPlaying()) return;
+        transform.parent.gameObject.SetActive(false);
+        UIManager.Instance.UICenter.ShowUiCenter("Lose");
+        GameManager.Instance.SetGamePlay(false);
         //Invoke(nameof(DoDespawn), 5);
 
         //ItemDropSpawnerCtrl.Instance.DropMany(ItemCode.Gold, transform.position, 10);

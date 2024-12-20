@@ -57,4 +57,11 @@ public class EnemyWave : MyBehaviour
             }
         }
     }
+    public virtual void KillAllEnemy()
+    {
+        foreach(EnemyCtrl enemyCtrl in spawnedEnemies)
+        {
+            enemyCtrl.EnemyDamageReceiver.Receive(500);
+        }
+    }
 }

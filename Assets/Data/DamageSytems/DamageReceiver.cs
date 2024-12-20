@@ -16,7 +16,7 @@ public abstract class DamageReceiver : MyBehaviour
     {
         this.currentHP = this.maxHP;
     }
-    public virtual void Receive(int damage, DamageSender damageSender)
+    public virtual void Receive(int damage)
     {
         if (!this.isImmotal) this.currentHP -= damage;
         if (this.currentHP < 0) this.currentHP = 0;
@@ -29,7 +29,10 @@ public abstract class DamageReceiver : MyBehaviour
     {
         return this.isDead = this.currentHP <= 0;
     }
-
+    public virtual float HPRatio()
+    {
+        return (float)this.currentHP / (float)this.maxHP;
+    }
     protected abstract void OnDead();
 
     protected abstract void OnHurt();

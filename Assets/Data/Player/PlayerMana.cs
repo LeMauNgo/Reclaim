@@ -16,11 +16,15 @@ public class PlayerMana : PlayerAbstract
         this.currentMana += speed * Time.fixedDeltaTime;
         if(this.currentMana > maxMana) this.currentMana = maxMana;
     }
-    protected virtual void DeductMana(int numberMana)
+    public virtual void DeductMana(int numberMana)
     {
         this.currentMana -= numberMana;
     }
-    protected virtual float ManaRatio()
+    public virtual float GetCurrentMana()
+    {
+        return this.currentMana;
+    }
+    public virtual float ManaRatio()
     {
         return this.currentMana/this.maxMana;
     }

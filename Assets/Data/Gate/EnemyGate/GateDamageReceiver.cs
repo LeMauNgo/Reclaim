@@ -22,8 +22,10 @@ public class GateDamageReceiver : EnemyDamageReceiver
     }
     protected override void OnDead()
     {
+        if (!GameManager.Instance.IsPlaying()) return;
         transform.parent.gameObject.SetActive(false);
         UIManager.Instance.UICenter.ShowUiCenter("Win");
         GameManager.Instance.SetGamePlay(false);
+        EnemySpawnerCtrl.Instance.EnemyWave.KillAllEnemy();
     }
 }
