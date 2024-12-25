@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class TowerCtrl : EnemyCtrl
+public class TowerCtrl : ArmyCtrl
 {
     [SerializeField] protected Transform rotator;
     public Transform Rotator => rotator;

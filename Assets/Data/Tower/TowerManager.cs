@@ -34,6 +34,6 @@ public class TowerManager : MyBehaviour
     protected virtual void CheckEnemyGate()
     {
         if (this.ctrls.Any()) return;
-        this.enemyGateCtrl.EnemyDamageReceiver.gameObject.SetActive(true);
+        this.enemyGateCtrl.DamageReceiver.gameObject.SetActive(true);
     }
 }

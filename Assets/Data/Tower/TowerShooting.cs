@@ -37,7 +37,7 @@ public class TowerShooting : TowerAbstract
     }
     protected virtual void GetTarget()
     {
-        this.target = towerCtrl.EnemyRada.GetTarget();
+        this.target = towerCtrl.Rada.GetTarget();
     }
     protected virtual void LookAtTarget()
     {
