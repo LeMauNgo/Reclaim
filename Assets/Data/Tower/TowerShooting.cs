@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TowerShooting : TowerAbstract
 {
-    [SerializeField] protected MyTeam target;
+    [SerializeField] protected DamageReceiver target;
     [SerializeField] protected float timer;
     [SerializeField] protected int delay = 1;
     [SerializeField] protected List<AttackPoint> firePoints;
@@ -75,7 +75,7 @@ public class TowerShooting : TowerAbstract
     protected virtual bool IsTargetDead()
     {
         if (this.target == null) return true;
-        if (!this.target.DamageReceiver.IsDead()) return false;
+        if (!this.target.IsDead()) return false;
         this.killCount++;
         this.totalKill++;
         this.target = null;

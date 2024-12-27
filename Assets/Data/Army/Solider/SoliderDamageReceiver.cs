@@ -14,6 +14,7 @@ public class SoliderDamageReceiver : ArmyDamageReceiver
         capsuleCollider.center = new Vector3(0, 1, 0);
         capsuleCollider.isTrigger = true;
         Debug.LogWarning(gameObject.name + "LoadCollider", gameObject);
+
     }
     protected override void OnDead()
     {

@@ -16,7 +16,7 @@ public class TowerDamageReceiver : ArmyDamageReceiver
         transform.parent.gameObject.SetActive(false);
 
         TowerCtrl tower = (TowerCtrl)ctrl;
-        tower.TowerManager.RemoveTower(tower);
+        tower.Ctrl.ArmyManager.RemoveTower(tower);
         //Invoke(nameof(DoDespawn), 5);
 
         //ItemDropSpawnerCtrl.Instance.DropMany(ItemCode.Gold, transform.position, 10);

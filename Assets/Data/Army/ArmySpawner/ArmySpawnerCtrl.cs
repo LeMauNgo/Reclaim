@@ -10,12 +10,15 @@ public class ArmySpawnerCtrl : MySingleton<ArmySpawnerCtrl>
     public ArmyPrefabs Prefabs => prefabs;
     [SerializeField] protected EnemyWave enemyWave;
     public EnemyWave EnemyWave => enemyWave;
+    [SerializeField] protected ArmyManager armyManager;
+    public ArmyManager ArmyManager => armyManager;
     protected override void LoadComponent()
     {
         base.LoadComponent();
         this.LoadSpawner();
         this.LoadArmyPrefabs();
         this.LoadEnemyWave();
+        this.LoadArmyManager();
     }
     protected virtual void LoadEnemyWave()
     {
@@ -34,5 +37,11 @@ public class ArmySpawnerCtrl : MySingleton<ArmySpawnerCtrl>
         if (this.prefabs != null) return;
         this.prefabs = GetComponentInChildren<ArmyPrefabs>();
         Debug.LogWarning(gameObject.name + "LoadArmyPrefabs", gameObject);
+    }    
+    protected virtual void LoadArmyManager()
+    {
+        if (this.armyManager != null) return;
+        this.armyManager = GetComponent<ArmyManager>();
+        Debug.LogWarning(gameObject.name + "LoadArmyManager", gameObject);
     }
 }

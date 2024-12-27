@@ -44,13 +44,25 @@ public abstract class ArmyDamageReceiver : DamageReceiver
     {
         this.ctrl.Despawn.DoDespawn();
     }
-protected override void Rebone()
+    protected override void Rebone()
     {
         base.Rebone();
         this._collider.enabled = true;
+        this.SetPosition();
     }
     protected override void OnHurt()
     {
         //throw new System.NotImplementedException();
+    }
+    protected virtual void SetPosition()
+    {
+        if(this.ctrl.GetTypeArmy() == ArmyType.Enemy)
+        {
+            transform.parent.position = new Vector3(42, 0, 39);
+        }
+        else
+        {
+            transform.parent.position = new Vector3(-42, 0, -39);
+        }
     }
 }

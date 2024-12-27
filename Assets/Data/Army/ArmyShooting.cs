@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArmyShooting : EnemySoliderAbstract
+public class ArmyShooting : SoliderAbstract
 {
-    [SerializeField] protected MyTeam target;
+    [SerializeField] protected DamageReceiver target;
     [SerializeField] protected float timer;
     [SerializeField] protected int delay = 1;
     [SerializeField] protected AttackPoint firePoint;
@@ -92,7 +92,7 @@ public class ArmyShooting : EnemySoliderAbstract
     protected virtual bool IsTargetDead()
     {
         if (this.target == null) return true;
-        if (!this.target.DamageReceiver.IsDead()) return false;
+        if (!this.target.IsDead()) return false;
         this.killCount++;
         this.totalKill++;
         this.target = null;

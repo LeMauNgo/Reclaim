@@ -7,20 +7,11 @@ public class TowerCtrl : ArmyCtrl
     public Transform Rotator => rotator;
     [SerializeField] protected TowerShooting towerShooting;
     public TowerShooting TowerShooting => towerShooting;
-    [SerializeField] protected TowerManager towerManager;
-    public TowerManager TowerManager => towerManager;
     protected override void LoadComponent()
     {
         base.LoadComponent();
         this.LoadRotator();
         this.LoadTowerShooting();
-        this.LoadTowerManager();
-    }
-    protected virtual void LoadTowerManager()
-    {
-        if (this.towerManager != null) return;
-        this.towerManager = GetComponentInParent<TowerManager>();
-        Debug.LogWarning(gameObject.name + "LoadTowerManager", gameObject);
     }
     protected virtual void LoadRotator()
     {
@@ -37,5 +28,10 @@ public class TowerCtrl : ArmyCtrl
     public override string GetName()
     {
         return "Tower";
+    }
+
+    protected override void SetTypeArmy()
+    {
+        this.type = ArmyType.Enemy;
     }
 }

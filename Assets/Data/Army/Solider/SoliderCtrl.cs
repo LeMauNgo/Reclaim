@@ -27,4 +27,5 @@ public abstract class SoliderCtrl : ArmyCtrl
         this.animator = GetComponentInChildren<Animator>();
         Debug.Log("LoadAnimator", gameObject);
     }
+
 }

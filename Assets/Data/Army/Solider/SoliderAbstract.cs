@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySoliderAbstract : MyBehaviour
+public class SoliderAbstract : MyBehaviour
 {
     [SerializeField] protected SoliderCtrl ctrl;
     protected override void LoadComponent()

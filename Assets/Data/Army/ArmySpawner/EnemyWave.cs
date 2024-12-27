@@ -7,18 +7,11 @@ public class EnemyWave : MyBehaviour
     [SerializeField] protected ArmySpawnerCtrl ctrl;
     [SerializeField] protected float spawnSpeed = 1f;
     [SerializeField] protected int maxSpawn = 15;
-    [SerializeField] protected List<ArmyCtrl> spawnedEnemies = new();
 
     private void Start()
     {
         Invoke(nameof(this.Spawning), this.spawnSpeed);
     }
-
-    protected virtual void FixedUpdate()
-    {
-        this.RemoveDeadOne();
-    }
-
     protected override void LoadComponent()
     {
         base.LoadComponent();
@@ -37,30 +30,11 @@ public class EnemyWave : MyBehaviour
         if (!GameManager.Instance.IsPlaying()) return;
         Invoke(nameof(this.Spawning), this.spawnSpeed);
 
-        if (this.spawnedEnemies.Count >= this.maxSpawn) return;
+        if (this.ctrl.ArmyManager.EnemySoliders.Count >= this.maxSpawn) return;
 
         ArmyCtrl prefab = this.ctrl.Prefabs.GetRandomEnemy();
-        ArmyCtrl newEnemy = this.ctrl.Spawner.Spawn(prefab, transform.position);
+        ArmyCtrl newEnemy = this.ctrl.Spawner.Spawn(prefab);
         newEnemy.gameObject.SetActive(true);
-        this.spawnedEnemies.Add(newEnemy);
-    }
-
-    protected virtual void RemoveDeadOne()
-    {
-        foreach (ArmyCtrl enemyCtrl in this.spawnedEnemies)
-        {
-            if (enemyCtrl.DamageReceiver.IsDead())
-            {
-                this.spawnedEnemies.Remove(enemyCtrl);
-                return;
-            }
-        }
-    }
-    public virtual void KillAllEnemy()
-    {
-        foreach (ArmyCtrl enemyCtrl in spawnedEnemies)
-        {
-            enemyCtrl.DamageReceiver.Receive(500);
-        }
+        this.ctrl.ArmyManager.AddEnemy((SoliderCtrl) newEnemy);
     }
 }

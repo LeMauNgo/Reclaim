@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class SholiderMove : EnemySoliderAbstract
+public class SholiderMove : SoliderAbstract
 {
     [SerializeField] protected PathCtrl pathCtrl;
     [SerializeField] protected int currnetPointIndex;
@@ -28,7 +28,15 @@ public class SholiderMove : EnemySoliderAbstract
     void LoadPathCtrl()
     {
         if (pathCtrl != null) return;
-        this.pathCtrl = GameObject.Find("PathMoving_0").GetComponent<PathCtrl>();
+        if (this.ctrl.GetTypeArmy() == ArmyType.Enemy)
+        {
+            this.pathCtrl = GameObject.Find("PathMoving_0").GetComponent<PathCtrl>();
+        }
+        else
+        {
+            this.pathCtrl = GameObject.Find("PathMoving_1").GetComponent<PathCtrl>();
+        }
+        
         Debug.Log("LoadPathCtrl", gameObject);
     }
     private void Update()

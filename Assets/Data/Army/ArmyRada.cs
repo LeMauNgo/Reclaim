@@ -5,13 +5,13 @@ using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(Rigidbody))]
-public class ArmyRada : MyBehaviour
+public abstract class ArmyRada : MyBehaviour
 {
-    [SerializeField] protected MyTeam nearest;
+    [SerializeField] protected DamageReceiver nearest;
     [SerializeField] protected SphereCollider _collider;
     [SerializeField] protected Rigidbody _rigidbody;
-    [SerializeField] protected List<MyTeam> targets;
-    public List<MyTeam> Targets => targets;
+    [SerializeField] protected List<DamageReceiver> targets;
+    public List<DamageReceiver> Targets => targets;
     protected override void LoadComponent()
     {
         base.LoadComponent();
@@ -49,26 +49,25 @@ public class ArmyRada : MyBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        MyTeam targetable = other.GetComponent<MyTeam>();
-        if (targetable == null) return;
-
-        this.AddTarget(targetable);
-        //Debug.Log(other.name + " " , other.gameObject);
+        this.AddTarget(other);
     }
     private void OnTriggerExit(Collider other)
     {
-        MyTeam target = other.GetComponentInParent<MyTeam>();
+        DamageReceiver target = other.GetComponentInParent<DamageReceiver>();
         if (target == null) return;
 
         this.RemoveTarget(target);
     }
-    protected virtual void AddTarget(MyTeam targetable)
+    protected virtual void AddTarget(Collider other)
     {
-        MyTeam target = targetable.GetComponentInParent<MyTeam>();
+        DamageReceiver targetable = other.GetComponent<DamageReceiver>();
+        if (targetable == null) return;
+
+        DamageReceiver target = targetable.GetComponentInParent<DamageReceiver>();
         if (target == null) return;
         this.targets.Add(target);
     }
-    protected virtual void RemoveTarget(MyTeam target)
+    protected virtual void RemoveTarget(DamageReceiver target)
     {
         this.targets.Remove(target);
     }
@@ -77,7 +76,7 @@ public class ArmyRada : MyBehaviour
         if (this.targets.Count == 0) this.nearest = null;
         float targetDistance;
         float targetMinDistance = Mathf.Infinity;
-        foreach (MyTeam target in this.targets)
+        foreach (DamageReceiver target in this.targets)
         {
             targetDistance = Vector3.Distance(transform.position, target.transform.position);
             if (targetDistance > targetMinDistance) continue;
@@ -85,15 +84,15 @@ public class ArmyRada : MyBehaviour
             this.nearest = target;
         }
     }
-    public virtual MyTeam GetTarget()
+    public virtual DamageReceiver GetTarget()
     {
         return this.nearest;
     }
     protected virtual void RemoveDeadTarget()
     {
-        foreach (MyTeam target in this.targets)
+        foreach (DamageReceiver target in this.targets)
         {
-            if (target.DamageReceiver.IsDead())
+            if (target.IsDead())
             {
                 if (target == this.nearest) this.nearest = null;
                 this.targets.Remove(target);
