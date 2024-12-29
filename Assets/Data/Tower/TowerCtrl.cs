@@ -32,6 +32,6 @@ public class TowerCtrl : ArmyCtrl
 
     protected override void SetTypeArmy()
     {
-        this.type = ArmyType.Enemy;
+        //this.type = ArmyType.Enemy;
     }
 }

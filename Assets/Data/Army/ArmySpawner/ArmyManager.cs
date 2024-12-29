@@ -9,6 +9,7 @@ public class ArmyManager : MyBehaviour
     [SerializeField] protected List<SoliderCtrl> enemySoliderAlive;
     public List<SoliderCtrl> EnemySoliders => enemySoliderAlive;
     [SerializeField] protected List<TowerCtrl> enemyTowerAlive;
+    public List<TowerCtrl> EnemyTowerAlive => enemyTowerAlive;
     protected override void LoadComponent()
     {
         base.LoadComponent();
@@ -16,24 +17,26 @@ public class ArmyManager : MyBehaviour
     }
     protected virtual void LoadEnemyTower()
     {
-        if (this.enemySoliderAlive.Count > 0) return;
+        if (this.enemyTowerAlive.Count > 0) return;
         TowerCtrl[] towers = GetComponentsInChildren<TowerCtrl>();
-        this.enemyTowerAlive = towers.ToList();
-        Debug.LogWarning(gameObject.name + " LoadTowerCtrl", gameObject);
+        foreach (TowerCtrl tower in towers)
+        {
+            if(tower.GetTypeArmy() != ArmyType.Enemy) continue;
+            this.enemyTowerAlive.Add(tower);
+        }
+        Debug.LogWarning(gameObject.name + " LoadEnemyTower", gameObject);
     }
     public virtual void RemoveTower(TowerCtrl ctrl)
     {
         this.enemyTowerAlive.Remove(ctrl);
-        this.CheckEnemyGate();
-    }
-    protected virtual void CheckEnemyGate()
-    {
-        if (this.enemyTowerAlive.Any()) return;
-        //this.enemyGateCtrl.DamageReceiver.gameObject.SetActive(true);
     }
     public virtual void AddEnemy(SoliderCtrl enemy)
     {
         this.enemySoliderAlive.Add(enemy);
+    }
+    private void FixedUpdate()
+    {
+        this.RemoveDeadOne();
     }
     protected virtual void RemoveDeadOne()
     {

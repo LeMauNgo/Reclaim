@@ -14,10 +14,11 @@ public class SpawnSolider : PlayerAbstract
         if (InputHotkeys.Instance.SpawnSwat())
         {
             ArmyCtrl prefab = ArmySpawnerCtrl.Instance.Prefabs.GetByName("Swat");
-            ArmyCtrl newEnemy = ArmySpawnerCtrl.Instance.Spawner.Spawn(prefab, prefab.transform.position);
+            ArmyCtrl newEnemy = ArmySpawnerCtrl.Instance.Spawner.Spawn(prefab, new Vector3(-42,0,-39));
             newEnemy.gameObject.SetActive(true);
             this.playerCtrl.PlayerMana.DeductMana(1);
             //this.spawnedSolider.Add(newEnemy);
+
         }
     }
 }

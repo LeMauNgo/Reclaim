@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ArmyAbstract : MyBehaviour
 {
-    [SerializeField] protected ArmyCtrl armyCtrl;
+    [SerializeField] protected ArmyCtrl ctrl;
     protected override void LoadComponent()
     {
         base.LoadComponent();
@@ -12,8 +12,8 @@ public class ArmyAbstract : MyBehaviour
     }
     protected virtual void LoadCtrl()
     {
-        if (armyCtrl != null) return;
-        this.armyCtrl = GetComponentInParent<ArmyCtrl>();
+        if (ctrl != null) return;
+        this.ctrl = GetComponentInParent<ArmyCtrl>();
         Debug.Log("LoadCtrl", gameObject);
 
     }

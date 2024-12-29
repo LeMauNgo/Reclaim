@@ -24,6 +24,8 @@ public class PlayerCtrl : MyBehaviour
     public Animator Animator => animator;
     [SerializeField] protected PlayerMana playerMana;
     public PlayerMana PlayerMana => playerMana;
+    [SerializeField] protected PlayerDamageReceiver playerDamageReceiver;
+    public PlayerDamageReceiver PlayerDamageReceiver => playerDamageReceiver;
     protected override void LoadComponent()
     {
         base.LoadComponent();
@@ -34,13 +36,19 @@ public class PlayerCtrl : MyBehaviour
         this.LoadWeapons();
         this.LoadAnimator();
         this.LoadPlayerMana();
+        this.LoadPlayerDamageReceiver();
+    }
+    protected virtual void LoadPlayerDamageReceiver()
+    {
+        if (this.playerDamageReceiver != null) return;
+        this.playerDamageReceiver = GetComponentInChildren<PlayerDamageReceiver>();
+        Debug.Log(transform.name + ": LoadPlayerDamageReceiver", gameObject);
     }
     protected virtual void LoadPlayerMana()
     {
         if (this.playerMana != null) return;
         this.playerMana = GetComponentInChildren<PlayerMana>();
         Debug.Log(transform.name + ": LoadPlayerMana", gameObject);
-
     }
     protected virtual void LoadWeapons()
     {

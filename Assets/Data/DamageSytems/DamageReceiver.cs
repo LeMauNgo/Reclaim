@@ -1,13 +1,17 @@
 using UnityEngine;
 //using UnityEngine.EventSystems;
-
+[RequireComponent(typeof(Collider))]
 public abstract class DamageReceiver : MyBehaviour
 {
     [SerializeField] protected int currentHP = 10;
     [SerializeField] protected int maxHP = 10;
     [SerializeField] protected bool isDead = false;
     [SerializeField] protected bool isImmotal = false;
-
+    protected override void LoadComponent()
+    {
+        base.LoadComponent();
+        this.LoadCollider();
+    }
     private void OnEnable()
     {
         this.Rebone();
@@ -24,7 +28,7 @@ public abstract class DamageReceiver : MyBehaviour
         if (this.IsDead()) this.OnDead();
         else this.OnHurt();
     }
-
+    protected abstract void LoadCollider();
     public virtual bool IsDead()
     {
         return this.isDead = this.currentHP <= 0;

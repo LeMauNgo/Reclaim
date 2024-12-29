@@ -20,6 +20,7 @@ public class SoliderDamageReceiver : ArmyDamageReceiver
     {
         SoliderCtrl ctrl = (SoliderCtrl)this.ctrl;
         ctrl.Animator.SetBool("IsDeath", this.isDead);
+        InventoriesManager.Instance.AddItem(ItemCode.Gold, 10);
         base.OnDead();
     }
 }

@@ -33,7 +33,7 @@ public class EnemyWave : MyBehaviour
         if (this.ctrl.ArmyManager.EnemySoliders.Count >= this.maxSpawn) return;
 
         ArmyCtrl prefab = this.ctrl.Prefabs.GetRandomEnemy();
-        ArmyCtrl newEnemy = this.ctrl.Spawner.Spawn(prefab);
+        ArmyCtrl newEnemy = this.ctrl.Spawner.Spawn(prefab, new Vector3(42,0,39));
         newEnemy.gameObject.SetActive(true);
         this.ctrl.ArmyManager.AddEnemy((SoliderCtrl) newEnemy);
     }

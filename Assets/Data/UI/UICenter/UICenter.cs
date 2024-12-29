@@ -22,18 +22,36 @@ public class UICenter : MyBehaviour
         this.ctrls = centerCtrls.ToList();
         Debug.LogWarning(gameObject.name + " LoadUiCenterCtrl", gameObject);
     }
+    public virtual UICenterCtrl GetUiCenterByName(string name)
+    {
+        foreach (UICenterCtrl ctrl in this.ctrls)
+        {
+            if (ctrl.name != name) continue;
+            return ctrl;
+        }
+        return null;
+    }
     public virtual void ShowUiCenter(string ctrlName)
     {
         foreach(UICenterCtrl uiCtrl in ctrls)
         {
             if (uiCtrl.transform.name != ctrlName)
             {
-                uiCtrl.gameObject.SetActive(false);
+                if(uiCtrl.ShowHide == null)
+                {
+                    Debug.LogWarning(uiCtrl.transform.name);
+                    continue;
+                }
+                uiCtrl.ShowHide.gameObject.SetActive(false);
             }
             else
             {
-                uiCtrl.gameObject.SetActive(true);
+                uiCtrl.ShowHide.gameObject.SetActive(true);
             }
         }
+    }
+    public virtual void HideUiCenter()
+    {
+        this.ShowUiCenter("Bull'sEye");
     }
 }

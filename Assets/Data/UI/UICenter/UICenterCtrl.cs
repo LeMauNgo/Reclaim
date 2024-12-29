@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class UICenterCtrl : MonoBehaviour
+public abstract class UICenterCtrl : UICenterAbstract
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] protected Transform showHide;
+    public Transform ShowHide => showHide;
+    protected override void LoadComponent()
     {
-        
+        base.LoadComponent();
+        this.LoadShowHide();
     }
-
-    // Update is called once per frame
-    void Update()
+    protected virtual void LoadShowHide()
     {
-        
+        if (this.showHide != null) return;
+        this.showHide = transform.Find("ShowHide");
+        Debug.Log(transform.name + ": LoadShowHide", gameObject);
     }
 }

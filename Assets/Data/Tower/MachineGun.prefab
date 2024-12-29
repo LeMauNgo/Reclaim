@@ -130,7 +130,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6538346168938930142}
-  - component: {fileID: 6226641975093334271}
+  - component: {fileID: 8155548105802076949}
   m_Layer: 0
   m_Name: TowerShooting
   m_TagString: Untagged
@@ -153,7 +153,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1154598269202340157}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6226641975093334271
+--- !u!114 &8155548105802076949
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,18 +162,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1307972336943870249}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db1f5c574bc5ba542aabe58317f1186e, type: 3}
+  m_Script: {fileID: 11500000, guid: f748cf679f625d44ea6da12d293289bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerCtrl: {fileID: 8758400764306205690}
+  ctrl: {fileID: 8758400764306205690}
   target: {fileID: 0}
   timer: 0
   delay: 1
+  firePoint: {fileID: 0}
+  killCount: 0
+  totalKill: 0
   firePoints:
   - {fileID: 5305223795273003527}
   - {fileID: 7941451870209567333}
-  killCount: 0
-  totalKill: 0
 --- !u!1 &1655132984871997733
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,11 +229,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   despawn: {fileID: 4496067417277835081}
   damageReceiver: {fileID: 5344070891265047632}
-  rada: {fileID: 7265773943891098432}
+  ctrl: {fileID: 0}
+  rada: {fileID: 2951041790535135518}
   type: 2
   rotator: {fileID: 5320604715196845909}
-  towerShooting: {fileID: 6226641975093334271}
-  armyManager: {fileID: 0}
+  towerShooting: {fileID: 8155548105802076949}
 --- !u!114 &3309439817610734322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -628,7 +629,7 @@ GameObject:
   - component: {fileID: 5550752970869444}
   - component: {fileID: 4083948802376644040}
   - component: {fileID: 6001007783081032398}
-  - component: {fileID: 7265773943891098432}
+  - component: {fileID: 2951041790535135518}
   m_Layer: 2
   m_Name: TowerRada
   m_TagString: Untagged
@@ -699,7 +700,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7265773943891098432
+--- !u!114 &2951041790535135518
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -708,7 +709,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3237772654975296235}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b721e08f2fcacb46847ded53cf8d7e0, type: 3}
+  m_Script: {fileID: 11500000, guid: 131512cf66c7a334fbf6d5118193db7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nearest: {fileID: 0}
@@ -1191,7 +1192,6 @@ GameObject:
   - component: {fileID: 2735139672059070749}
   - component: {fileID: 8106914893812742809}
   - component: {fileID: 5344070891265047632}
-  - component: {fileID: 5572030186095085289}
   m_Layer: 0
   m_Name: TowerDamageReceiver
   m_TagString: Untagged
@@ -1255,18 +1255,6 @@ MonoBehaviour:
   isImmotal: 0
   _collider: {fileID: 8106914893812742809}
   ctrl: {fileID: 8758400764306205690}
---- !u!114 &5572030186095085289
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8186052077236176826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6030f3d7db8af4548bc5baca1f98c9c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8211041699381612189
 GameObject:
   m_ObjectHideFlags: 0
@@ -1313,6 +1301,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 8758400764306205690}
   spawner: {fileID: 0}
-  isDespawnByTime: 1
+  isDespawnByTime: 0
   timeLife: 7
   currentTime: 7

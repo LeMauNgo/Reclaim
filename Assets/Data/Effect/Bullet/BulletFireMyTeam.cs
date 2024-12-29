@@ -6,7 +6,18 @@ public class BulletFireMyTeam : BulletDamageSender
 {
     protected override bool CanSendDamage(Collider collider)
     {
-        if(collider.GetComponentInParent<MyTeam>()) return true; return false;
+        PlayerCtrl playerCtrl = collider.GetComponentInParent<PlayerCtrl>();
+        if (playerCtrl != null ) return true;
+
+        MyGateDamageReceiver myGateDamageReceiver = collider.GetComponent<MyGateDamageReceiver>();
+        if (myGateDamageReceiver != null) return true;
+
+        ArmyCtrl armyCtrl = collider.GetComponentInParent<ArmyCtrl>();
+        if (armyCtrl == null) return false;
+        ArmyType armyType = armyCtrl.GetTypeArmy();
+        if (armyType == ArmyType.Friendly) return true;
+        return false;
+
     }
     protected override void SpawnHit(Vector3 posittion)
     {

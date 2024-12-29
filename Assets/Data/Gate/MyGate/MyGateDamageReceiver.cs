@@ -5,27 +5,18 @@ using UnityEngine;
 public class MyGateDamageReceiver : DamageReceiver
 {
     [SerializeField] protected CapsuleCollider capsuleCollider;
-    [SerializeField] protected SoliderCtrl ctrl;
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        this.LoadCapsuleCollider();
-        this.LoadSoliderCtrl();
+        this.LoadCollider();
     }
     private void OnEnable()
     {
         this.currentHP = 200;
         this.maxHP = 200;
     }
-    protected virtual void LoadSoliderCtrl()
+    protected override void LoadCollider()
     {
-        if (this.ctrl != null) return;
-        this.ctrl = GetComponentInParent<SoliderCtrl>();
-        Debug.Log(gameObject.name + "LoadSoliderCtrl", gameObject);
-    }
-    protected virtual void LoadCapsuleCollider()
-    {
-
         if (this.capsuleCollider != null) return;
         this.capsuleCollider = transform.GetComponent<CapsuleCollider>();
         this.capsuleCollider.radius = 3f;
@@ -41,10 +32,6 @@ public class MyGateDamageReceiver : DamageReceiver
         transform.parent.gameObject.SetActive(false);
         UIManager.Instance.UICenter.ShowUiCenter("Lose");
         GameManager.Instance.SetGamePlay(false);
-    }
-    protected virtual void DoDespawn()
-    {
-        this.ctrl.Despawn.DoDespawn();
     }
     protected override void Rebone()
     {

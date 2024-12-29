@@ -16,10 +16,6 @@ public class SholiderMove : SoliderAbstract
     {
         this.currnetPointIndex = 0;
     }
-    private void Start()
-    {
-        
-    }
     protected override void LoadComponent()
     {
         base.LoadComponent();
@@ -39,7 +35,7 @@ public class SholiderMove : SoliderAbstract
         
         Debug.Log("LoadPathCtrl", gameObject);
     }
-    private void Update()
+    private void FixedUpdate()
     {
         this.Moving();
     }
@@ -48,6 +44,7 @@ public class SholiderMove : SoliderAbstract
         this.MovingStatus();
         if(isFinish || !canMove || this.IsDeath())
         {
+            //transform.parent.position = new Vector3(0, 0, 0);
             this.ctrl.Agent.isStopped = true;
             return;
         }

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-[RequireComponent(typeof(Collider))]
 public abstract class ArmyDamageReceiver : DamageReceiver
 {
     [SerializeField] protected Collider _collider;
@@ -10,7 +9,6 @@ public abstract class ArmyDamageReceiver : DamageReceiver
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        this.LoadCollider();
         this.LoadCtrl();
     }
     protected virtual void LoadCtrl()
@@ -19,26 +17,12 @@ public abstract class ArmyDamageReceiver : DamageReceiver
         this.ctrl = GetComponentInParent<ArmyCtrl>();
         Debug.Log(gameObject.name + "LoadCtrl", gameObject);
     }
-    protected abstract void LoadCollider();
-    //{
-    //    //if (this._collider != null) return;
-    //    //this._collider = transform.GetComponent<Collider>();
-    //    ////this._collider.radius = 0.3f;
-    //    ////this._collider.height = 2;
-    //    ////this._collider.center = new Vector3(0, 1, 0);
-    //    //this._collider.isTrigger = true;
-    //    //Debug.LogWarning(gameObject.name + "LoadCapsuleCollider", gameObject);
-    //}
     protected override void OnDead()
     {
         //this.ctrl.Animator.SetBool("IsDeath", this.isDead);
         this._collider.enabled = false;
         this.ctrl.Rada.RemoveTarget();
         Invoke(nameof(DoDespawn), 5);
-
-        //ItemDropSpawnerCtrl.Instance.DropMany(ItemCode.Gold, transform.position, 10);
-        //ItemDropSpawnerCtrl.Instance.DropMany(ItemCode.Wand, transform.position, 1);
-        //InventoriesManager.Instance.AddItem(ItemCode.PlayerExp, 1);
     }
     protected virtual void DoDespawn()
     {
@@ -48,7 +32,7 @@ public abstract class ArmyDamageReceiver : DamageReceiver
     {
         base.Rebone();
         this._collider.enabled = true;
-        this.SetPosition();
+        //this.SetPosition();
     }
     protected override void OnHurt()
     {
@@ -56,13 +40,13 @@ public abstract class ArmyDamageReceiver : DamageReceiver
     }
     protected virtual void SetPosition()
     {
-        if(this.ctrl.GetTypeArmy() == ArmyType.Enemy)
+        if(this.ctrl.GetTypeArmy() == ArmyType.Friendly)
         {
-            transform.parent.position = new Vector3(42, 0, 39);
+            transform.parent.position = new Vector3(-42, 0, -39);
         }
         else
         {
-            transform.parent.position = new Vector3(-42, 0, -39);
+            transform.parent.position = new Vector3(42, 0, 39);
         }
     }
 }

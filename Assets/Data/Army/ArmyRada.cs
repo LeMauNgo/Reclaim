@@ -62,10 +62,7 @@ public abstract class ArmyRada : MyBehaviour
     {
         DamageReceiver targetable = other.GetComponent<DamageReceiver>();
         if (targetable == null) return;
-
-        DamageReceiver target = targetable.GetComponentInParent<DamageReceiver>();
-        if (target == null) return;
-        this.targets.Add(target);
+        this.targets.Add(targetable);
     }
     protected virtual void RemoveTarget(DamageReceiver target)
     {
