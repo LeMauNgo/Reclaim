@@ -11,6 +11,6 @@ public class SwatCtrl : SoliderCtrl
 
     protected override void SetTypeArmy()
     {
-        this.type = ArmyType.Friendly;
+        this.type = ArmyType.Ally;
     }
 }

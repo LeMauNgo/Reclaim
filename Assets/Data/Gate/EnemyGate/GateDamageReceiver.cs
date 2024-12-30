@@ -37,7 +37,7 @@ public class GateDamageReceiver : DamageReceiver
     }
     protected virtual bool CanReceive()
     {
-        return ArmySpawnerCtrl.Instance.ArmyManager.EnemyTowerAlive.Count == 0;
+        return ArmySpawnerCtrl.Instance.ArmyManager.TowerManager.EnemyTowerAlive.Count == 0;
     }
     protected override void OnHurt()
     {

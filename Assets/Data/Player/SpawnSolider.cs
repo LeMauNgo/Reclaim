@@ -15,6 +15,7 @@ public class SpawnSolider : PlayerAbstract
         {
             ArmyCtrl prefab = ArmySpawnerCtrl.Instance.Prefabs.GetByName("Swat");
             ArmyCtrl newEnemy = ArmySpawnerCtrl.Instance.Spawner.Spawn(prefab, new Vector3(-42,0,-39));
+            ArmySpawnerCtrl.Instance.ArmyManager.AddEnemy(newEnemy);
             newEnemy.gameObject.SetActive(true);
             this.playerCtrl.PlayerMana.DeductMana(1);
             //this.spawnedSolider.Add(newEnemy);

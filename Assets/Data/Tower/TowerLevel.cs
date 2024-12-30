@@ -19,13 +19,14 @@ public class TowerLevel : LevelAbstract
         Debug.Log(transform.name + ": LoadTowerCtrl", gameObject);
     }
 
-    protected override bool DeductExp(int exp)
-    {
-        return this.towerCtrl.TowerShooting.DeductKillCount(exp);
-    }
 
-    protected override int GetCurrentExp()
-    {
-        return this.towerCtrl.TowerShooting.KillCount;
-    }
+    //protected override int GetCurrentGold()
+    //{
+    //    throw new System.NotImplementedException();
+    //}
+
+    //protected override bool DeductGold(int exp)
+    //{
+    //    throw new System.NotImplementedException();
+    //}
 }

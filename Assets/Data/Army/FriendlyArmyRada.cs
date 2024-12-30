@@ -14,7 +14,7 @@ public class FriendlyArmyRada : ArmyRada
 
         ArmyCtrl armyCtrl = other.GetComponentInParent<ArmyCtrl>();
         if (armyCtrl == null) return;
-        if (armyCtrl.GetTypeArmy() == ArmyType.Friendly) return;
+        if (armyCtrl.GetTypeArmy() == ArmyType.Ally) return;
         base.AddTarget(other);
     }
 }

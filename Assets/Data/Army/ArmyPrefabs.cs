@@ -25,7 +25,7 @@ public class ArmyPrefabs : PoolPrefabs<ArmyCtrl>
     {
         foreach (ArmyCtrl ctrl in this.prefabs)
         {
-            if (ctrl.GetTypeArmy() != ArmyType.Friendly) continue;
+            if (ctrl.GetTypeArmy() != ArmyType.Ally) continue;
             this.friendly.Add(ctrl);
         }
         Debug.LogWarning(gameObject.name + " LoadFriendly", gameObject);

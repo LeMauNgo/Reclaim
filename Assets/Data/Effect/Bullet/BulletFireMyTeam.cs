@@ -15,7 +15,7 @@ public class BulletFireMyTeam : BulletDamageSender
         ArmyCtrl armyCtrl = collider.GetComponentInParent<ArmyCtrl>();
         if (armyCtrl == null) return false;
         ArmyType armyType = armyCtrl.GetTypeArmy();
-        if (armyType == ArmyType.Friendly) return true;
+        if (armyType == ArmyType.Ally) return true;
         return false;
 
     }

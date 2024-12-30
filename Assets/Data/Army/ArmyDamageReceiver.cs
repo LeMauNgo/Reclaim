@@ -40,7 +40,7 @@ public abstract class ArmyDamageReceiver : DamageReceiver
     }
     protected virtual void SetPosition()
     {
-        if(this.ctrl.GetTypeArmy() == ArmyType.Friendly)
+        if(this.ctrl.GetTypeArmy() == ArmyType.Ally)
         {
             transform.parent.position = new Vector3(-42, 0, -39);
         }

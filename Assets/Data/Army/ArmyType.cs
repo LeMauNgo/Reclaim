@@ -5,6 +5,6 @@ using UnityEngine;
 public enum ArmyType
 {
     None,
-    Friendly,
+    Ally,
     Enemy
 }

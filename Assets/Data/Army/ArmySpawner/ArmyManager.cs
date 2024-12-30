@@ -6,54 +6,80 @@ using UnityEngine;
 
 public class ArmyManager : MyBehaviour
 {
-    [SerializeField] protected List<SoliderCtrl> enemySoliderAlive;
-    public List<SoliderCtrl> EnemySoliders => enemySoliderAlive;
-    [SerializeField] protected List<TowerCtrl> enemyTowerAlive;
-    public List<TowerCtrl> EnemyTowerAlive => enemyTowerAlive;
+    [SerializeField] protected List<ArmyCtrl> armyAlive;
+    public List<ArmyCtrl> ArmyAlive => armyAlive;
+    [SerializeField] protected SoliderManager soliderManager;
+    public SoliderManager SoliderManager => soliderManager;
+    [SerializeField] protected TowerManager towerManager;
+    public TowerManager TowerManager => towerManager;
+
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        this.LoadEnemyTower();
+        this.LoadSoliderManager();
+        this.LoadTowerManager();
+        this.LoadArrmy();
     }
-    protected virtual void LoadEnemyTower()
+    protected virtual void LoadArrmy()
     {
-        if (this.enemyTowerAlive.Count > 0) return;
-        TowerCtrl[] towers = GetComponentsInChildren<TowerCtrl>();
-        foreach (TowerCtrl tower in towers)
-        {
-            if(tower.GetTypeArmy() != ArmyType.Enemy) continue;
-            this.enemyTowerAlive.Add(tower);
-        }
-        Debug.LogWarning(gameObject.name + " LoadEnemyTower", gameObject);
+        if (this.armyAlive.Count > 0) return;
+        ArmyCtrl[] armyCtrls = GetComponentsInChildren<ArmyCtrl>();
+        this.armyAlive = armyCtrls.ToList();
+        Debug.LogWarning(gameObject.name + " LoadArrmy", gameObject);
+
     }
-    public virtual void RemoveTower(TowerCtrl ctrl)
+    protected virtual void LoadSoliderManager()
     {
-        this.enemyTowerAlive.Remove(ctrl);
+        if (this.soliderManager != null) return;
+        this.soliderManager = GetComponent<SoliderManager>();
+        Debug.LogWarning(gameObject.name + " LoadSoliderManager", gameObject);
+    }    
+    protected virtual void LoadTowerManager()
+    {
+        if (this.towerManager != null) return;
+        this.towerManager = GetComponent<TowerManager>();
+        Debug.LogWarning(gameObject.name + " LoadTowerManager", gameObject);
     }
-    public virtual void AddEnemy(SoliderCtrl enemy)
+    public virtual void AddEnemy(ArmyCtrl army)
     {
-        this.enemySoliderAlive.Add(enemy);
+        this.armyAlive.Add(army);
+        this.soliderManager.LoadSolider();
     }
     private void FixedUpdate()
     {
         this.RemoveDeadOne();
     }
-    protected virtual void RemoveDeadOne()
-    {
-        foreach (SoliderCtrl enemyCtrl in this.enemySoliderAlive)
-        {
-            if (enemyCtrl.DamageReceiver.IsDead())
-            {
-                this.enemySoliderAlive.Remove(enemyCtrl);
-                return;
-            }
-        }
-    }
     public virtual void KillAllEnemy()
     {
-        foreach (ArmyCtrl enemyCtrl in enemySoliderAlive)
+        foreach (ArmyCtrl enemyCtrl in armyAlive)
         {
             enemyCtrl.DamageReceiver.Receive(500);
         }
     }
+    protected virtual void RemoveDeadOne()
+    {
+        foreach (ArmyCtrl armyCtrl in this.armyAlive)
+        {
+            if (armyCtrl.DamageReceiver.IsDead())
+            {
+                this.armyAlive.Remove(armyCtrl);
+                this.towerManager.LoadEnemyTower();
+                this.soliderManager.LoadSolider();
+                return;
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

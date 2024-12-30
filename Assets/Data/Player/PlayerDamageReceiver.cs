@@ -44,7 +44,7 @@ public class PlayerDamageReceiver : DamageReceiver
     }
     protected virtual void Heald()
     {
-        if (this.HPRatio() > 0.5f) return;
+        if (this.HPRatio() > 0.3f) return;
         InventoriesManager.Instance.RemoveItem(ItemCode.HealthPotion,1);
         this.Healing(50);
     }

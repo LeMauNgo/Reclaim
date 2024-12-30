@@ -13,9 +13,6 @@ public class TowerDamageReceiver : ArmyDamageReceiver
         this.ctrl.Rada.RemoveTarget();
         transform.parent.gameObject.SetActive(false);
 
-        TowerCtrl tower = (TowerCtrl)ctrl;
-        tower.Ctrl.ArmyManager.RemoveTower(tower);
-
         InventoriesManager.Instance.AddItem(ItemCode.Gold, 30);
     }
 
