@@ -38,7 +38,16 @@ public class PlayerDamageReceiver : DamageReceiver
     {
         //throw new System.NotImplementedException();
     }
-
+    private void Update()
+    {
+        this.Heald();
+    }
+    protected virtual void Heald()
+    {
+        if (this.HPRatio() > 0.5f) return;
+        InventoriesManager.Instance.RemoveItem(ItemCode.HealthPotion,1);
+        this.Healing(50);
+    }
     protected override void LoadCollider()
     {
         if (this.capsuleCollider != null) return;

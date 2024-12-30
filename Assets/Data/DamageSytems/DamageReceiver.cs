@@ -16,6 +16,13 @@ public abstract class DamageReceiver : MyBehaviour
     {
         this.Rebone();
     }
+    public virtual void Healing(int Blood)
+    {
+        if(IsDead()) return;
+        this.currentHP += Blood;
+        if (this.currentHP < maxHP) return;
+        this.currentHP = maxHP;
+    }
     protected virtual void Rebone()
     {
         this.currentHP = this.maxHP;

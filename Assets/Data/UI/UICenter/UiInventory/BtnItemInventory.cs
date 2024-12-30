@@ -12,18 +12,21 @@ public class BtnItemInventory : BaseBtn
 
     [SerializeField] protected ItemInventory itemInventory;
     public ItemInventory ItemInventory => itemInventory;
-    //private void OnEnable()
-    //{
-    //    this.itemNameTxt.text = this.itemInventory.GetItemName().ToString();
-    //    this.itemCountTxt.text = this.itemInventory.itemCount.ToString();
-    //    this.logo.sprite = this.itemInventory.ItemProfile.logo;
-    //}
+    private void OnEnable()
+    {
+        this.itemNameTxt.text = this.itemInventory.GetItemName().ToString();
+        this.logo.sprite = this.itemInventory.ItemProfile.logo;
+    }
+    private void FixedUpdate()
+    {
+        this.itemCountTxt.text = this.itemInventory.itemCount.ToString();
+    }
     protected override void LoadComponent()
     {
-        //base.LoadComponent();
-        //this.LoadItemNameTxt();
-        //this.LoadItemCountTxt();
-        //this.LoadLogo();
+        base.LoadComponent();
+        this.LoadItemNameTxt();
+        this.LoadItemCountTxt();
+        this.LoadLogo();
 
     }
     protected virtual void LoadItemNameTxt()
@@ -51,6 +54,7 @@ public class BtnItemInventory : BaseBtn
 
     protected override void Onclick()
     {
-        throw new System.NotImplementedException();
+        PlayerManager.Instance.PlayerCtrl.PlayerDamageReceiver.Healing(50);
+        this.itemInventory.Deduct(1);
     }
 }

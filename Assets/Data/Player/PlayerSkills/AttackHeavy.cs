@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class AttackHeavy : AttackAbstract
 {
@@ -22,8 +23,6 @@ public class AttackHeavy : AttackAbstract
         effectFly.FlyToTarget.SetTarget(this.playerCtrl.CrosshairPointer.transform);
 
         effect.gameObject.SetActive(true);
-
-        //this.SpawnSound(effectFly.transform.position);
     }
 
     protected virtual EffectCtrl GetEffect()
