@@ -6,6 +6,7 @@ public class InventoryTesting : MyBehaviour
     private void Start()
     {
         this.AddTestItems(ItemCode.HealthPotion, 100);
+        this.AddTestItems(ItemCode.Gold , 9999999);
     }
 
     [ProButton]

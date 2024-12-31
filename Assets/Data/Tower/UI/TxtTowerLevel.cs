@@ -2,25 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class TxtTowerLevel : TxtLevel
+public class TxtTowerLevel : TxtLevel
 {
-    [SerializeField] protected TowerCtrl towerCtrl;
-
+    [SerializeField] protected TowerManager towerManager;
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        this.LoadTowerCtrl();
+        this.LoadTowerManager();
     }
 
-    protected virtual void LoadTowerCtrl()
+    protected virtual void LoadTowerManager()
     {
-        if (this.towerCtrl != null) return;
-        this.towerCtrl = GetComponentInParent<TowerCtrl>();
-        Debug.Log(transform.name + ": LoadTowerCtrl", gameObject);
+        if (this.towerManager != null) return;
+        this.towerManager = GetComponentInParent<TowerManager>();
+        Debug.Log(transform.name + ": LoadTowerManager", gameObject);
     }
 
-    //protected override string GetLevel()
-    //{
-    //    //return this.towerCtrl.Level.CurrentLevel.ToString();
-    //}
+    protected override string GetLevel()
+    {
+        return this.towerManager.CurrentLevel.ToString();
+    }
 }

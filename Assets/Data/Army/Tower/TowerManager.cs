@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class TowerManager : MyBehaviour
@@ -15,6 +16,11 @@ public class TowerManager : MyBehaviour
     public List<TowerCtrl> EnemyTowerAlive => enemyTowerAlive;
 
     [Header("AllyTowerAlive")]
+    [SerializeField] protected int currentLevel = 1;
+    public int CurrentLevel => currentLevel;
+
+    [SerializeField] protected int maxLevel = 100;
+    [SerializeField] protected int nextLevelGold;
     [SerializeField] protected List<TowerCtrl> allyTowerAlive;
     public List<TowerCtrl> AllyTowerAlive => allyTowerAlive;
 
@@ -35,5 +41,27 @@ public class TowerManager : MyBehaviour
         this.towerAlive = this.armyManager.ArmyAlive.OfType<TowerCtrl>().ToList();
         this.enemyTowerAlive = this.towerAlive.Where(s => s.GetTypeArmy() == ArmyType.Enemy).ToList();
         this.allyTowerAlive = this.towerAlive.Where(s => s.GetTypeArmy() == ArmyType.Ally).ToList();
+    }
+    // ---------------Level----------------------------------
+    protected virtual int GetCurrentGold()
+    {
+        return InventoriesManager.Instance.Currency().FindItem(ItemCode.Gold).itemCount;
+    }
+    protected virtual void DeductGold(int gold)
+    {
+        InventoriesManager.Instance.RemoveItem(ItemCode.Gold, gold);
+    }
+
+    public virtual void Leveling()
+    {
+        if (this.currentLevel >= this.maxLevel) return;
+        if (this.GetCurrentGold() < this.GetNextLevelGold()) return;
+        this.DeductGold(this.GetNextLevelGold());
+        this.currentLevel++;
+    }
+
+    public virtual int GetNextLevelGold()
+    {
+        return this.nextLevelGold = this.currentLevel * 300;
     }
 }

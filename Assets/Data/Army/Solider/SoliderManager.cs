@@ -11,6 +11,13 @@ public class SoliderManager : MyBehaviour
     public List<SoliderCtrl> SoliderAlive => soliderAlive;
     [SerializeField] protected List<SoliderCtrl> enemySoliderAlive;
     public List<SoliderCtrl> EnemySoliderAlive => enemySoliderAlive;
+
+    [Header("AllySoliderAlive")]
+    [SerializeField] protected int currentLevel = 1;
+    public int CurrentLevel => currentLevel;
+
+    [SerializeField] protected int maxLevel = 100;
+    [SerializeField] protected int nextLevelGold;
     [SerializeField] protected List<SoliderCtrl> allySoliderAlive;
     public List<SoliderCtrl> AllySoliderAlive => allySoliderAlive;
     protected override void LoadComponent()
@@ -29,5 +36,27 @@ public class SoliderManager : MyBehaviour
         this.soliderAlive = this.armyManager.ArmyAlive.OfType<SoliderCtrl>().ToList();
         this.enemySoliderAlive = soliderAlive.Where(s => s.GetTypeArmy() == ArmyType.Enemy).ToList();
         this.allySoliderAlive = soliderAlive.Where(s => s.GetTypeArmy() == ArmyType.Ally).ToList();
+    }
+    // ---------------Level----------------------------------
+    protected virtual int GetCurrentGold()
+    {
+        return InventoriesManager.Instance.Currency().FindItem(ItemCode.Gold).itemCount;
+    }
+    protected virtual void DeductGold(int gold)
+    {
+        InventoriesManager.Instance.RemoveItem(ItemCode.Gold, gold);
+    }
+
+    public virtual void Leveling()
+    {
+        if (this.currentLevel >= this.maxLevel) return;
+        if (this.GetCurrentGold() < this.GetNextLevelGold()) return;
+        this.DeductGold(this.GetNextLevelGold());
+        this.currentLevel++;
+    }
+
+    public virtual int GetNextLevelGold()
+    {
+        return this.nextLevelGold = this.currentLevel * 100;
     }
 }
