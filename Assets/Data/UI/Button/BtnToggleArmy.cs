@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BtnToggleArmy : BaseBtn
 {
-    protected override void Onclick()
+    protected override void OnClick()
     {
         UIMyArrmy uIMyArrmy = (UIMyArrmy)UIManager.Instance.UICenter.GetUiCenterByName("MyArrmy");
         uIMyArrmy.Toggle();

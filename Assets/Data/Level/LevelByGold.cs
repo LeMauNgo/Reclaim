@@ -31,7 +31,7 @@ public class LevelByGold : LevelAbstract
     //    InventoriesManager.Instance.RemoveItem(ItemCode.Gold, gold);
     //}
 
-    //protected override void Onclick()
+    //protected override void OnClick()
     //{
     //    this.Leveling();
     //}

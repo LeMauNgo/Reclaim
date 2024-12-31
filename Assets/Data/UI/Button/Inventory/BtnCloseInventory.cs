@@ -16,7 +16,7 @@ public class BtnCloseInventory : BaseBtn
         this.uiInventory = GetComponentInParent<UiInventory>();
         Debug.Log(gameObject.name + "LoadUiInventory", gameObject);
     }
-    protected override void Onclick()
+    protected override void OnClick()
     {
         this.uiInventory.Hide();
     }

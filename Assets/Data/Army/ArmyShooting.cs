@@ -43,6 +43,7 @@ public abstract class ArmyShooting : ArmyAbstract
 
         this.SpawnProjectile(this.firePoint);
         this.SpawnMuzzle(this.firePoint);
+        this.SpawnSFX(this.firePoint.transform.position);
     }
 
     protected virtual void SpawnSFX(Vector3 position)

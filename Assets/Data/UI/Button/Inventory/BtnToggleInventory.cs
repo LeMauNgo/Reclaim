@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BtnToggleInventory : BaseBtn
 {
-    protected override void Onclick()
+    protected override void OnClick()
     {
         UiInventory uiInventory = (UiInventory)UIManager.Instance.UICenter.GetUiCenterByName("UiInventory");
         uiInventory.Toggle();

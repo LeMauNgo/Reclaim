@@ -22,18 +22,23 @@ public class SoundManager : MySingleton<SoundManager>
     protected override void Awake()
     {
         base.Awake();
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
         this.StartMusicBackground();
     }
-
+    protected virtual void FixedUpdate()
+    {
+        this.VolumeMusicUpdating(this.volumeMusic);
+        this.VolumeSfxUpdating(this.volumeSfx);
+    }
     protected override void LoadComponent()
     {
         base.LoadComponent();
         this.LoadSoundSpawnerCtrl();
+        this.LoadMusicCtrl();
     }
 
     protected virtual void LoadSoundSpawnerCtrl()
@@ -41,6 +46,12 @@ public class SoundManager : MySingleton<SoundManager>
         if (this.ctrl != null) return;
         this.ctrl = GameObject.FindAnyObjectByType<SoundSpawnerCtrl>();
         Debug.Log(transform.name + ": LoadSoundSpawnerCtrl", gameObject);
+    }    
+    protected virtual void LoadMusicCtrl()
+    {
+        if (this.bgMusic != null) return;
+        this.bgMusic = GetComponentInChildren<MusicCtrl>();
+        Debug.Log(transform.name + ": LoadMusicCtrl", gameObject);
     }
 
     public virtual void StartMusicBackground()
@@ -72,6 +83,7 @@ public class SoundManager : MySingleton<SoundManager>
     {
         MusicCtrl newMusic = (MusicCtrl)this.ctrl.Spawner.Spawn(musicPrefab, Vector3.zero);
         this.AddMusic(newMusic);
+        Debug.Log("Create");
         return newMusic;
     }
 

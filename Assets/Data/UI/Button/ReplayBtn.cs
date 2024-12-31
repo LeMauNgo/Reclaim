@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ReplayBtn : BaseBtn
 {
-    protected override void Onclick()
+    protected override void OnClick()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

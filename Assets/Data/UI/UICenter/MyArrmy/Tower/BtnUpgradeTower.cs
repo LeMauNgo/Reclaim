@@ -25,7 +25,7 @@ public class BtnUpgradeTower : BaseBtn
         this.levelTxt = transform.parent.Find("LevelTxt").GetComponentInChildren<TextMeshProUGUI>();
         Debug.Log(transform.name + ": LoadLevelTxt", gameObject);
     }
-    protected override void Onclick()
+    protected override void OnClick()
     {
         ArmySpawnerCtrl.Instance.ArmyManager.TowerManager.Leveling();
     }

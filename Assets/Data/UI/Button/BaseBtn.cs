@@ -24,7 +24,7 @@ public abstract class BaseBtn : MyBehaviour
     protected virtual void AddOnclick()
     {
 
-        this.btn.onClick.AddListener(Onclick);
+        this.btn.onClick.AddListener(OnClick);
     }
-    protected abstract void Onclick();
+    protected abstract void OnClick();
 }

@@ -52,7 +52,7 @@ public class BtnItemInventory : BaseBtn
         this.itemInventory = itemInventory;
     }
 
-    protected override void Onclick()
+    protected override void OnClick()
     {
         PlayerManager.Instance.PlayerCtrl.PlayerDamageReceiver.Healing(50);
         this.itemInventory.Deduct(1);
